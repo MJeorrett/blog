@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 
 export let article1 = (req: Request, res: Response) => {
     res.send(
+        "<a href='/'>home</a>" +
         "<h1>Hello world!</h1>" +
         "<h2><i>Welcome to 'Nine Bits in a Byte'</i></h2>" +
         "<p><i>02/02/2018</i></p>" +        
