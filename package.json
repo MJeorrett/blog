@@ -4,7 +4,7 @@
   "description": "Matthew Jeorrett's blog",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && node dist/server.js",
+    "start": "npm i && npm run build && node dist/server.js",
     "start:dev": "nodemon dist/server.js",
     "build": "tsc",
     "build:dev": "tsc -w",
