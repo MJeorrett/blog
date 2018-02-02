@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 export const index = (req: Request, res: Response) => {
     res.send(
-        "<h1>Nine Bits in a Byte</h1>" +
+        "<h1 style='text-align:center; color:dodgerblue'>NINE BITS IN A BYTE</h1>" +
         "<h2>Hi. Welcome to my blog</h2>" +
         "<h3>Articles:</h3>" +
         "<ul>" +
