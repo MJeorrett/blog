@@ -1,1 +1,1 @@
-export * from './article-1-hello-world';
+export * from './1-hello-world';
