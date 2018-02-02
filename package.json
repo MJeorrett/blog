@@ -7,9 +7,10 @@
     "start": "npm run build && node dist/server.js",
     "start:dev": "nodemon dist/server.js",
     "build": "npm run tsc",
-    "build:dev": "npm run tsc -w",
+    "build:dev": "npm run tsc:dev",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "tsc:dev": "tsc -w"
   },
   "author": "MJeorrett",
   "license": "ISC",
