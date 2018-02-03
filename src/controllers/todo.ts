@@ -25,6 +25,11 @@ export const index = (req: Request, res: Response) => {
             <td></td>
             <td>03-02-2018</td>
         </tr>
+        <tr>
+            <td>Add "Article Ideas" page</td>
+            <td></td>
+            <td>03-02-2018</td>
+        </tr>
     </tbody>
 </table>`
     );
