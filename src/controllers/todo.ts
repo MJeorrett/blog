@@ -16,9 +16,14 @@ export const index = (req: Request, res: Response) => {
     </thead>
     <tbody>
         <tr>
-            <td>Add Basic CSS</td>
+            <td>Basic CSS</td>
             <td></td>
             <td>02-02-2018</td>
+        </tr>
+        <tr>
+            <td>Automatic browser refreshing</td>
+            <td></td>
+            <td>03-02-2018</td>
         </tr>
     </tbody>
 </table>`
