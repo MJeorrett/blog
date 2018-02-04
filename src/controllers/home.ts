@@ -7,6 +7,7 @@ export const index = (req: Request, res: Response) => {
         "<h3>Articles:</h3>" +
         "<ul>" +
         "   <li><a href='/articles/1'>Hello World!</a></li>" +
+        "   <li><a href='/articles/2'>mkdir new_project</a></li>" +
         "</ul>" +
         "<h3><a href='/todo'>ToDo</a>"
     );

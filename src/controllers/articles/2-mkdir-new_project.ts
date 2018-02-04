@@ -1,0 +1,153 @@
+import { Request, Response } from 'express';
+
+export let article2 = (req: Request, res: Response) => {
+    res.send(
+`<a href='/'>home</a>
+<h1>mkdir new_project</h1>
+<h2><i>My starting point for this site</i></h2>
+<p><i>04/02/2018</i></p>
+
+<p>In this article I'm going to cover the inital setup for this site.  As I mentioned in my <a href="/articles/1">previous article</a> I am trying to keep things very basic to start. It's going to be in the form of a quick start guide so if you feel inspired to write your own blog you should be able to follow this and get something up and live on the internet (for free)!</p>
+
+<p>If you just want to start writing a blog then this is not the most effective way to get something good looking going quickly; something like <a href="https://wordpress.com/">WordPress</a> is probably a much better idea.  But if you are a developer who wants to get a deeper understanding of how things work then I think this is a good shout.</p>
+
+<h3>Pre-requisites</h3>
+The tools that you will need with links to downloads are:
+<ul>
+    <li><a href="https://nodejs.org/en/">node</a> + npm (npm comes with node by default)</li>
+    <li>A code editor.  I am using <a href="https://code.visualstudio.com/">Visual Studio Code</a> which is free and cross platform. You could of course just use notepad.</li>
+    <li>Heroku: a free, easy to use hosting platform. You will need an <a href="https://signup.heroku.com/dc">account</a> and the <a href="https://devcenter.heroku.com/articles/heroku-cli">CLI</a>. The CLI includes the option to install git which is also required.</li>
+</ul>
+
+<p>Just to let you know, I'm going to try to present this is simple easy to follow steps but if you have never set foot on the terminal before then you may struggle a little.</p>
+
+<h3>Language</h3>
+<p>My language of choice is <a href="https://www.typescriptlang.org/">TypeScript</a> as I am already familiar with it but I have never used it for back end stuff. To understand my reasons for using TypeScript instead of JavaScript read <a href="https://www.wallet.services/blog/2017/7/14/introducing-matthew-developer-evangelist">this article</a>.</p>
+
+<h2>Setup</h2>
+<p>Begin by creating a new directory and opening it in cmd; I have called mine <i>blog</i>.</p>
+
+<h3>Initialise git</h3>
+<p>I'm not going to go in to details about git, I'm going just cover the basics required to deploy to Heroku.  First run <b>git init</b> in your newly created project directory to initialise git.</p>
+
+<p>Then add a file called <i>.gitignore</i> in your project root; this will tell git not to include certain files when pushing to Heroku (probably not essential at this stage but good practice).  Add the following to the newly created file:</p>
+<h4><i>./.gitignore</i></h4>
+<pre>
+/node_modules
+/dist
+</pre>
+
+<p>You should commit to git regularly but I will only indicate below when a commit is required in order to deploy to Heroku.</p>
+
+<h3>Initialise npm</h3>
+<p>Npm is a widely used package manager for JavaScrpit; to set it up run <b>npm init</b> in your project root. You will be prompted to answer a few questions to which you can just enter anything sensible at this point; the critical ones will be overwritten later.</p>
+
+<h3>Set Up TypeScript</h3>
+<p>The TypeScript compiler is distributed as an npm package.  Install it by running <b>npm i --save-dev typescript</b>. TypeScript looks for configuration in a file called <i>tsconfig.json</i> so create this in your project root.  Then add the following basic setup to get you going:</p>
+<h4><i>./tsconfig.json</i></h4>
+<pre>
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es5",
+        "noImplicitAny": true,
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "outDir": "dist",
+        "baseUrl": ".",
+        "paths": {
+            "*": [
+                "node_modules/*"
+            ]
+        }
+    },
+    "include": [
+        "src/**/*"
+    ]
+}
+</pre>
+
+<p>This will tell TypeScript to compile all files in your <i>./src</i> directory (yet to be created) and output the result to <i>./dist</i>.  It also configures a few other sensible settings.</p>
+
+<h3>Set Up express</h3>
+<p><a href="https://expressjs.com/">Express</a> is a lightweight web framework that we will be using to create a very simple server. Install it by running <b>npm i --save-dev express</b> then install the types by running <b>npm i --save-dev @types/express</b>.</p>
+
+<p>Next create a <i>src</i> directory in your project root; this is where all your code will go.  Add a file called <i>server.ts</i> in <i>src</i> and add the below code which configures and runs a basic web server:
+<h4><i>./src/server.js</i></h4>
+<pre>
+import * as express from 'express';
+import { Request, Response } from 'express';
+
+const app = express();
+const port = process.env.PORT || 5000;
+
+app.get("/", (req: Request, res: Response) => {
+    res.send("Hello World!");
+});
+
+const server = app.listen(port, () => {
+    console.info("Blog is running at http://localhost:" + port);
+});
+</pre>
+
+<h3>Configure npm Scripts</h3>
+<p>First we are going to add one more npm package called <a href="https://github.com/remy/nodemon">nodemon</a>; to do this run <b>npm i --save-dev nodemon</b>. We will use this package to run our project so that when ever we update a source file our project is automatically restarted.</p>
+
+<p>Next we need to configure the scripts that are used to build and run the project; this is done in the <i>scripts</i> section of the <i>package.json</i> file. Below is my complete <i>package.json</i>, yours may looks slightly different but ensure that the scripts section exactly matches this:
+<h4><i>./package.json</i></h4>
+<pre>
+{
+    "name": "blog",
+    "version": "0.0.1",
+    "description": "Matthew Jeorrett's blog",
+    "main": "dist/server.js",
+    "scripts": {
+        "start": "node dist/server.js",
+        "start:dev": "nodemon dist/server.js",
+        "build:dev": "npm run tsc:dev",
+        "postinstall": "npm run tsc",
+        "test": "echo 'Error: no test specified' && exit 1",
+        "tsc": "tsc",
+        "tsc:dev": "tsc -w"
+    },
+    "author": "MJeorrett",
+    "license": "ISC",
+    "dependencies": {
+        "typescript": "^2.7.1",
+        "express": "^4.16.2",
+        "@types/express": "^4.11.1"    
+    },
+    "devDependencies": {
+        "nodemon": "^1.14.12"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/MJeorrett/blog"
+    },
+    "keywords": [
+        "blog",
+        "express",
+        "node"
+    ]
+}
+</pre>
+
+<p>While you are at it also update the <i>main</i> setting to what I have here, this tells npm where the entry point to your package is.</p>
+
+<p>You should now be able to build and run the project localy by running <b>npm run build:dev</b> and, in a separate cmd, <b>npm run start:dev</b>.  If you navigate to <i>localhost:5000</i> in a browser you should be greated with "Hello world!".</p>
+
+<h3>Deploy to Heroku</h3>
+<p>Lastly we are going to deploy to Heroku so that the whole world can see you blog.  The official docs for deploying node to Heroku are <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction">here</a> but I'll summarise.</p>
+
+<p>Before you begin you need to have the code you want to deploy commited to the active branch. Ensure now that everything you have done in the earlier steps is commited; to do this run <b>git status</b> and it should say something like 'nothing to commit, working tree clean'.  If not then you need to run <b>git add .</b> followed by <b>git commit -m "final changes before deploy"</b>.</p>
+
+<p>Now run <b>heroku login</b> and enter your credentials when prompted; this connects the cli with your account.</p>
+
+<p>Then run <b>heroku create</b> to create a new application. When you do this Herkou also creates a new git remote and adds it to your local repo under the name <i>heroku</i>.</p>
+
+<p>To deploy your application to Heroku all you have to do is push the version of the code you want to deploy to the master branch of the heroku remote; do this by running <b>git push heroku master</b>. The console will show output while the remote builds and deploys your code.  Once this is complete you should be able to open your delpoyed app by running <b>heroku open</b>.</p>
+
+<h3>Well Done!</h3>
+<p>If you have managed to follow along this far you now have a very basic public website: <b>amazing!</b>. What you do next is completely up to you but I would suggest replacing the "Hello World!" text (in <i>./src/server.ts</i>) with your first article.  If you spot any mistakes, get stuck or just want to say hi you can email me at <a href="mailto:ninebitsinabyte@gmail.com">ninebitsinabyte@gmail.com</a>, I'd love to hear from you!</p>`
+    );
+};

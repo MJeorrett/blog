@@ -12,5 +12,6 @@ app.set('port', port);
 app.get("/", homeController.index);
 app.get("/todo", todoController.index);
 app.get("/articles/1", articleControllers.article1);
+app.get("/articles/2", articleControllers.article2);
 
 module.exports = app;
