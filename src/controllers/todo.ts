@@ -19,26 +19,31 @@ export const index = (req: Request, res: Response) => {
             <td>Basic CSS</td>
             <td></td>
             <td>02-02-2018</td>
+            <td></td>            
         </tr>
         <tr>
             <td>Automatic browser refreshing</td>
             <td></td>
             <td>03-02-2018</td>
+            <td></td>            
         </tr>
         <tr>
             <td>Add "Article Ideas" page</td>
             <td></td>
             <td>03-02-2018</td>
+            <td></td>            
         </tr>
         <tr>
             <td>Task Management System</td>
             <td></td>
             <td>04-02-2018</td>
+            <td></td>            
         </tr>
         <tr>
             <td>Page View Counter</td>
             <td>views per page, unique views</td>
             <td>04-02-2018</td>
+            <td></td>            
         </tr>
     </tbody>
 </table>`
