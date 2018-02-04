@@ -1,0 +1,14 @@
+table {
+    border: 2px solid dodgerblue;
+    border-collapse: collapse;
+}
+
+thead {
+    border: 2px solid dodgerblue;
+    padding: 3px;
+}
+
+td, th {
+    border: 1px solid dodgerblue;
+    padding: 3px;    
+}

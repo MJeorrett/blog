@@ -2,7 +2,8 @@ import { Request, Response } from 'express';
 
 export const index = (req: Request, res: Response) => {
     res.send(
-`<a href='/'>home</a>
+`<link type="text/css" rel="stylesheet" href="/css/table.css" />
+<a href='/'>home</a>
 <h1>ToDo</h1>
 <h2><i>This is a list of all my plans for this website</i></h2>
 <table>
