@@ -35,6 +35,11 @@ export const index = (req: Request, res: Response) => {
             <td></td>
             <td>04-02-2018</td>
         </tr>
+        <tr>
+            <td>Page View Counter</td>
+            <td>views per page, unique views</td>
+            <td>04-02-2018</td>
+        </tr>
     </tbody>
 </table>`
     );
