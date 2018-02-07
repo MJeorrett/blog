@@ -30,7 +30,8 @@ const server = http.createServer((req, res) => {
 
         if (err) {
             res.statusCode = 500;
-            res.end(err + "\n");
+            res.write(err + "\n");
+            res.end();
             return;
         }
 
