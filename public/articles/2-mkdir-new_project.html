@@ -1,8 +1,4 @@
-import { Request, Response } from 'express';
-
-export let article2 = (req: Request, res: Response) => {
-    res.send(
-`<a href='/'>home</a>
+<a href='/'>home</a>
 <h1>mkdir new_project</h1>
 <h2><i>My starting point for this site</i></h2>
 <p><i>04/02/2018</i></p>
@@ -148,6 +144,4 @@ const server = app.listen(port, () => {
 <p>To deploy your application to Heroku all you have to do is push the version of the code you want to deploy to the master branch of the heroku remote; do this by running <b>git push heroku master</b>. The console will show output while the remote builds and deploys your code.  Once this is complete you should be able to open your delpoyed app by running <b>heroku open</b>.</p>
 
 <h3>Well Done!</h3>
-<p>If you have managed to follow along this far you now have a very basic public website: <b>amazing!</b>. What you do next is completely up to you but I would suggest replacing the "Hello World!" text (in <i>./src/server.ts</i>) with your first article.  If you spot any mistakes, get stuck or just want to say hi you can email me at <a href="mailto:ninebitsinabyte@gmail.com">ninebitsinabyte@gmail.com</a>, I'd love to hear from you!</p>`
-    );
-};
+<p>If you have managed to follow along this far you now have a very basic public website: <b>amazing!</b>. What you do next is completely up to you but I would suggest replacing the "Hello World!" text (in <i>./src/server.ts</i>) with your first article.  If you spot any mistakes, get stuck or just want to say hi you can email me at <a href="mailto:ninebitsinabyte@gmail.com">ninebitsinabyte@gmail.com</a>, I'd love to hear from you!</p>
