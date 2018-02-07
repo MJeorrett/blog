@@ -16,25 +16,29 @@ const server = http.createServer((req, res) => {
     const routeIsValid = routes.hasOwnProperty(uri);
     const resultUri = routeIsValid ? uri : "/404";
 
-    sendFile(resultUri, res);
+    writeFileForUri(resultUri, res)
+        .then(() => res.end());
 });
 
-function sendFile(uri, res) {
-    const filePath = path.join(process.cwd(), "public", routes[uri]);
+function writeFileForUri(uri, res) {
+    return new Promise((resolve, reject) => {
 
-    fs.readFile(filePath, (err, file) => {
+        const filePath = path.join(process.cwd(), "public", routes[uri]);
+        
+        fs.readFile(filePath, (err, file) => {
+            
+            if (err) {
+                res.statusCode = 500;
+                res.write(err + "\n");
+                return;
+            }
+            
+            res.statusCode = 200;
+            res.write(file);
 
-        if (err) {
-            res.statusCode = 500;
-            res.write(err + "\n");
-            res.end();
-            return;
-        }
-
-        res.statusCode = 200;
-        res.write(file);
-        res.end();
-    });
+            resolve();
+        });
+    })
 }
 
 server.listen(port, () => {
