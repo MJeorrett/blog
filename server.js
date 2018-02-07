@@ -10,20 +10,16 @@ const port = process.env.PORT || 5000;
 const server = http.createServer((req, res) => {
 
     const uri = url.parse(req.url).path;
+
     res.setHeader('Content-Type', 'text/html');
 
     const routeIsValid = routes.hasOwnProperty(uri);
+    const resultUri = routeIsValid ? uri : "/404";
 
-    if (!routeIsValid) {
-        res.statusCode = 404;
-        const errorFile = path.join(process.cwd(), "public", "404.html");
-        fs.readFile(errorFile, (err, file) => {
-            res.write(file);
-            res.end();
-        });
-        return;
-    }
+    sendFile(resultUri, res);
+});
 
+function sendFile(uri, res) {
     const filePath = path.join(process.cwd(), "public", routes[uri]);
 
     fs.readFile(filePath, (err, file) => {
@@ -39,7 +35,7 @@ const server = http.createServer((req, res) => {
         res.write(file);
         res.end();
     });
-});
+}
 
 server.listen(port, () => {
     console.log(`Server running on port ${port}`);
