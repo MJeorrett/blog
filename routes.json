@@ -1,0 +1,9 @@
+{
+    "/": "home.html",
+    "/home": "home.html",
+    "/todo": "todo.html",
+    "/articles/1": "articles/1-hello-world.html",
+    "/articles/2": "articles/2-mkdir-new_project.html",
+    "/img/mac_classic.jpg": "img/mac_classic.jpg",
+    "/css/table.css": "css/table.css"
+}
