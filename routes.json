@@ -7,5 +7,6 @@
     "/articles/3": "articles/3-kiss.html",
     "/img/mac_classic.jpg": "img/mac_classic.jpg",
     "/css/table.css": "css/table.css",
+    "/css/reset.css": "css/reset.css",
     "/404": "404.html"
 }
