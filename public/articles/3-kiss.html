@@ -1,5 +1,3 @@
-<link type="text/css" rel="stylesheet" href="/css/reset.css" />
-
 <a href='/'>home</a>
 
 <h1>KISS</h1>
@@ -8,48 +6,48 @@
 
 <p><i>Keep It Simple Stupid</i> is an expression I learned from my year convenor when studying architecture; the idea is that a simple solution is normally best.  In my experience it applies to coding about 97% of the time (give or take!).</p>
 
-<p>I stated in my <a href="/articles/2">last article</a> that I wanted to keep the setup for this blog as basic as possible but, on reflection, I added two complications that aren't really needed:
+<p>I stated in my <a href="/articles/2">last article</a> that I wanted to keep the setup for this blog as basic as possible but, on reflection, I added two complications that aren't really needed:</p>
     <ol>
         <li>TypeScript</li>
         <li>Express</li>
     </ol>
-I said that I wanted to use TypeScript because of the reasons stated <a href="https://www.wallet.services/blog/2017/7/14/introducing-matthew-developer-evangelist">here</a> but this blog is about exploring different things. I haven't spent any significant time working in JavaScript so I am going to use this as an opportunity to try and see if my preference for TypeScript is justified.</p>
+<p>I said that I wanted to use TypeScript because of the reasons stated <a href="https://www.wallet.services/blog/2017/7/14/introducing-matthew-developer-evangelist">here</a> but this blog is about exploring different things. I haven't spent any significant time working in JavaScript so I am going to use this as an opportunity to try and see if my preference for TypeScript is justified.</p>
 
 <p>As for Express, to be honest it didn't even occur to me that it would be possible to run a server using plain node which, in retrospect, is pretty stupid; it is exactly what node is designed for!</p>
 
 <p>I have now re-written the site without using TypeScript or Express and I am much happier with the result. In some ways it is simpler but I have also had to write more code to implement the stuff you get for free with Express; in particular routing.</p>
 
-<h3>Routing</h3>
-To get started all I wanted to do was return html files selected based on the request path. My initial idea was to directly map the requested path to the project file system i.e. if <i>articles/1-hello-world.html</i> is requested then the file at <i>articles/1-hello-world.html</i> (relative to the project root) would be returned.</p>
+<h2>Routing</h2>
+<p>To get started all I wanted to do was return html files selected based on the request path. My initial idea was to directly map the requested path to the project file system i.e. if <i>articles/1-hello-world.html</i> is requested then the file at <i>articles/1-hello-world.html</i> (relative to the project root) would be returned.</p>
 
 <p>This was easy to implement and worked a treat but then I sat back and thought about the security implications. Worst case scenario was that a request to my site could be be made for any file on the server, though I am not sure there would be a practicable way of requesting files outside of my project directory.  At the very least I would have no control over what files in the project could be requested.</p>
 
 <p>My solution was a simple routing table that maps a request path to a file path. All file paths are relative to a "public" folder in my project (a common convention) which makes it easy to see which files are accessible via the server.  I declared the routing in a json object like so:</p>
 
 <h4><i>./routes.json</i></h4>
-<pre>
-    {
-        "/": "home.html",
-        "/home": "home.html",
-        "/todo": "todo.html",
-        "/articles/1": "articles/1-hello-world.html",
-        "/articles/2": "articles/2-mkdir-new_project.html",
-        "/articles/3": "articles/3-kiss.html",
-        "/img/mac_classic.jpg": "img/mac_classic.jpg",
-        "/css/table.css": "css/table.css",
-        "/404": "404.html"
-    }
-</pre>
+    <pre>
+{
+    "/": "home.html",
+    "/home": "home.html",
+    "/todo": "todo.html",
+    "/articles/1": "articles/1-hello-world.html",
+    "/articles/2": "articles/2-mkdir-new_project.html",
+    "/articles/3": "articles/3-kiss.html",
+    "/img/mac_classic.jpg": "img/mac_classic.jpg",
+    "/css/table.css": "css/table.css",
+    "/404": "404.html"
+}
+    </pre>
 
 <p>Then all I had to was to require it into my server and add some logic to ensure that any requests for a file not in the routing table are redirected to my 404 route. The looks like this:</p>
 
 <h4><i>./server.js</i></h4>
-<pre>
-    const routeIsValid = routes.hasOwnProperty(uri);
-    const resultUri = routeIsValid ? uri : "/404";
-</pre>
+    <pre>
+const routeIsValid = routes.hasOwnProperty(uri);
+const resultUri = routeIsValid ? uri : "/404";
+    </pre>
 
 <p><i>resultUri</i> is then mapped to the corresponding file in my <i>public</i> folder.</p>
 
-<h3>Wheel Re-invention Warning</h3>
+<h2>Wheel Re-invention Warning</h2>
 <p>I'm much happier now that I have a nice simple project setup that has no dependencies (other than node). It has already allowed me to start thinking and learning about some lower level stuff which just passed me by when using frameworks. I should end with a reminder that I have approached my blog like this as a learning excercise but in general: <b>don't re-invent the wheel!</b>.</p>
