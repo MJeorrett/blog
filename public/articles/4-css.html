@@ -7,7 +7,7 @@
 <h2 class="article-subtitle">It may not look pretty but at least I have control!</h2>
 <p class="article-date">21-02-2018</p>
 
-<p>What do you think of the new look? I have added some css to my site and completed my first <a href="/todo">todo</a>; happy days!  Ok I admit it is still very basic (and not very stylish!) but I have made one significant change: I am now using a css reset. This means that it is not longer your browser that is in control of how my site looks, now I am.</p>
+<p>What do you think of the new look? I have added some css to my site and completed my first <a href="/todo">todo</a>; happy days!  Ok I admit it is still very basic (and not very stylish!) but I have made one significant change: I am now using a css reset. This means that instead of your browser being in control of how my site looks it is me!</p>
 
 <h3>What's a CSS reset?</h3>
 <p>When your browser renders a page it applies a default style sheet called the <i>user agent stlye sheet</i>.  Any style properties for any elements that are not defined by your own css fall back to the browser defaults.  The issue with this is that the default styles are completely up to each browser manufaturer and so your page will look different depending on what browser is being used. The solution is to use a css reset stylesheet.</p>
@@ -69,12 +69,12 @@ As you can see, it doesn't come close to covering all styles for all elements bu
 </p>
 
 <h3>What have I added?</h3>
-<p>Although the reset looks fairly minimal it completely removes almost all differentiation between element types everything from an <i>h1</i> to a <i>p</i> tag are the same size and has no margin or padding.  To see what the site looks like with just the reset click the button below:
+<p>Although the reset looks fairly minimal it completely removes almost all differentiation between element types.  Everything from an <i>h1</i> to a <i>p</i> tag is made the same size and has no margin or padding.  To see what the site looks like with just the reset click the button below:
 <br /><button id="remove-styles">Remove Styles</button>
 </p>
 
 <h3>Main.css</h3>
-<p>The above button just removes link element which references my custom styles. It also saves a copy so that the element can be replaced when you click the button again. My custom styles are listed below along with a few notes about what they do and the choices I made:
+<p>The above button just removes the link element which references my custom styles (t also saves a copy so that the element can be replaced when you click the button again). My custom styles are listed below along with a few notes about what they do and the choices I made:
 <h3 class="code-snippet-path">./public/css/main.css</h3>
 <pre class="code-snippet">
 /* This adds a bit of space between the edge of my content and the window. */
@@ -164,7 +164,7 @@ ol {
 </pre>
 
 <h3>Out with the Old and In with the New?</h3>
-<p>You may have noticed that old articles haven't changed. One of the things I want to do with this site is record the progression; when I make something better I don't want to apply it everywhere. I like the idea of being able to keep a visible record of the improvements I have made.</p>
+<p>You may have noticed that old articles haven't changed. One of the things I want to do with this site is record the progression; when I make something better I don't want to apply it everywhere. I like the idea of being able to keep a visible record of the improvements I have made.  Idealy I'd like some kind of versioning system so that you can see old and new side by side or allow you to dynamically select which version you would like to see.  Sounds like a <a href="/todo">todo</a> is needed so I'd better go and add that now...see you next time!</p>
 
 <script>
 	(function(){
