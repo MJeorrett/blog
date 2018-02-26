@@ -1,73 +1,77 @@
 body {
     margin: 20px;
+    font-size: 21px;
 }
 
 h1 {
-    color: dodgerblue;
-    font-size: 4em;
-    text-align: center;
+	color: dodgerblue;
+	font-size: 4em;
+	text-align: center;
 }
 
 h2 {
-    font-size: 2.5em;
+	font-size: 2em;
 }
 
 h3 {
-    font-size: 1.5em;
+	font-size: 1.5em;
 }
 
 h4 {
-    font-size: 1.2em;
+	font-size: 1.2em;
 }
 
 h1, h2, h3, h4 {
-    margin-bottom: 0.5em;
-}
-
-p {
-    margin-bottom: 1.5em;
-    margin-top: 1em;
-}
-
-b {
-    font-weight: bold;
-}
-
-i {
-    font-style: italic;
+	margin-bottom: 0.5em;
 }
 
 pre {
-    font-family: monospace;
+    white-space: pre-wrap;
+}
+
+p {
+	margin-bottom: 1.5em;
+	margin-top: 1em;
+}
+
+b {
+	font-weight: bold;
+}
+
+i {
+	font-style: italic;
 }
 
 ul, ol {
-    margin: 25px;
+	margin: 25px;
 }
 
 ul {
-    list-style-type: disc;
+	list-style-type: disc;
 }
 
 ol {
-    list-style-type: decimal
+	list-style-type: decimal
 }
 
 .article-subtitle {
-    font-style: italic;
-    font-weight: bold;
+	font-style: italic;
+	font-weight: bold;
 }
 
 .article-date {
-    font-style: italic;
+	font-style: italic;
 }
 
-.code-snippet .file-path {
-    font-style: italic;
-    font-weight: bold;
+.code-snippet-path {
+	font-style: italic;
+	font-weight: bold;
 }
 
 .code-snippet {
-    background-color: lightgray;
-    padding: 1em;
+	background-color: lightgray;
+    font-family: monospace;
+    font-size: 0.9em;
+	margin: 1em 0;
+	padding: 1em;
 }
