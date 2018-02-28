@@ -9,7 +9,7 @@ const port = process.env.PORT || 5000;
 
 const server = http.createServer((req, res) => {
 
-    const uri = url.parse(req.url).path;
+    const uri = url.parse(req.url).path.split("?")[0];
 
     res.setHeader('Content-Type', 'text/html');
 
