@@ -1,6 +1,8 @@
 table {
     border: 2px solid dodgerblue;
     border-collapse: collapse;
+    margin-bottom: 1em;
+    margin-top: 1em;
 }
 
 thead {
@@ -10,5 +12,5 @@ thead {
 
 td, th {
     border: 1px solid dodgerblue;
-    padding: 3px;    
+    padding: 0.4em;    
 }
