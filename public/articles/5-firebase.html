@@ -1,0 +1,64 @@
+<head>
+    <link type="text/css" rel="stylesheet" href="/css/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css/main.css" />
+    <link type="text/css" rel="stylesheet" href="/css/table.css" />
+</head>
+
+<a href="/home">home</a>
+
+<h1>Firebase</h1>
+<h2 class="article-subtitle">A whole bunch of awesomeness for free!</h2>
+<p class="article-date">27-02-2018</p>
+
+<p>
+    sign up for firebase
+    create app
+    enable email and password auth
+    create user
+    Authentication
+        - don't think you can authenticate an application, you have to authenticate as a user
+        - simplest way to call signInWithEmailAndPassword
+        - don't want to commit email and password to git or have them accessible in the front end
+        - think the simplest solution is to create api routes so auth is in back end and I can require credentials from ignored file.
+        - copy paste js from cdn
+
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Details / Notes</th>
+                <th>Date Added</th>
+                <th>Date Completed</th>
+            </tr>
+        </thead>
+        <tbody id="todos">
+        </tbody>
+    </table>
+</p>
+
+<script>
+    function reqListener() {
+        const todos = JSON.parse(this.responseText);
+        const todosTableBody = document.getElementById('todos');
+        
+        todos.forEach(todo => {
+            const row = document.createElement('tr');
+            row.appendChild(createTd(todo.title));
+            row.appendChild(createTd(todo.description));
+            row.appendChild(createTd(todo.dateAdded));
+            row.appendChild(createTd(todo.dateCompleted));
+            todosTableBody.appendChild(row);
+        }, todos);
+    }
+
+    function createTd(innerHtml) {
+        const td = document.createElement('td');
+        td.innerHTML = innerHtml || "";
+        return td;
+    }
+
+    var req = new XMLHttpRequest();
+    req.addEventListener('load', reqListener);
+    req.open('GET', '/api/todos');
+    req.send();
+</script>
