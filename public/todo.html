@@ -15,103 +15,32 @@
             <th>Date Completed</th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
-            <td>Basic CSS</td>
-            <td></td>
-            <td>02-02-2018</td>
-            <td>20-02-2018</td>            
-        </tr>
-        <tr>
-            <td>Automatic browser refreshing</td>
-            <td>Make it so that the browser refreshes automatically when the source changes (while developing)</td>
-            <td>03-02-2018</td>
-            <td></td>            
-        </tr>
-        <tr>
-            <td>Add "Article Ideas" page</td>
-            <td></td>
-            <td>03-02-2018</td>
-            <td></td>            
-        </tr>
-        <tr>
-            <td>Task Management System</td>
-            <td>
-                <ul>
-                    <li>CRUD</li>
-                    <li>hierarchy of granularity</li>
-                    <li>managing dependencies</li>
-                    <li>prioritising</li>
-                </ul>
-            </td>
-            <td>04-02-2018</td>
-            <td></td>            
-        </tr>
-        <tr>
-            <td>Page View Counter</td>
-            <td>views per page, unique views</td>
-            <td>04-02-2018</td>
-            <td></td>            
-        </tr>
-        <tr>
-            <td>Update README</td>
-            <td>Add instructions for building and running.</td>
-            <td>07-02-2018</td>
-            <td></td>  
-        </tr>
-        <tr>
-            <td>Templating</td>
-            <td>Create basic templating engine for articles</td>
-            <td>21-02-2018</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Firebase</td>
-            <td>Implement Google Firebase for storing todos</td>
-            <td>21-02-2018</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>CSS pre-processor</td>
-            <td>Have a go at writing a basic css pre-processor to make styles dryer and more readable</td>
-            <td>21-02-2018</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Article tags</td>
-            <td>
-                <ul>
-                    <li>Ability to set arbitrary number of tags against an article.</li>
-                    <li>Ability for user to view all tags</li>
-                    <li>Ability for user to search for articles with a given tag</li>
-                </ul>
-            </td>
-            <td>21-02-2018</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Github integration</td>
-            <td>Use github api to enable embedding files in articles as they are at a particular commit. Include a chache so that the request limit is not exceeded.</td>
-            <td>24-02-2018</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Fix content type for Css</td>
-            <td>At the moment the server sets the <i>Content-Type</i> haeder for all responses to 'text/html' but for css it should be text/css</td>
-            <td>26-02-2018</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Granular versioning</td>
-            <td>Design a way of having multiple versions of the same page / feature available concurrently and allow the user to switch between them.</td>
-            <td>27-02-2018</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Write Title Explination Article</td>
-            <td>Write article about why I called the site 'Nine Bits in a Byte' (as promised in article 1).</td>
-            <td>27-02-2018</td>
-            <td></td>
-        </tr>
-    </tbody>
+    <tbody id="todos"></tbody>
 </table>
+
+<script>
+    function requestOnLoad() {
+        const todos = JSON.parse(this.responseText);
+        const todosTableBody = document.getElementById('todos');
+        
+        todos.forEach(todo => {
+            const row = document.createElement('tr');
+            row.appendChild(createTd(todo.title));
+            row.appendChild(createTd(todo.description));
+            row.appendChild(createTd(todo.dateAdded));
+            row.appendChild(createTd(todo.dateCompleted));
+            todosTableBody.appendChild(row);
+        }, todos);
+    }
+
+    function createTd(innerHtml) {
+        const td = document.createElement('td');
+        td.innerHTML = innerHtml || "";
+        return td;
+    }
+
+    var req = new XMLHttpRequest();
+    req.addEventListener('load', requestOnLoad);
+    req.open('GET', '/api/todos');
+    req.send();
+</script>
